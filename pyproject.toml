@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "pynlog"
 version = "0.1.0"
-description = "A simple logger that prints colored logs to the console and to a file."
+description = "A simple logger that prints logs to the console and to a file out of the box."
 authors = [
     { name = "Michael" }
 ]
@@ -13,8 +13,6 @@ dependencies = []
 readme = "README.md"
 requires-python = ">=3.8"
 
-[tools.hatch.build.targets.wheel]
-packages = ["src/pynlog"]
-
 [tools.hatch.build]
+packages = ["src/pynlog"]
 include = ["src/pynlog/*.pyi", "src/pynlog/py.typed"]
