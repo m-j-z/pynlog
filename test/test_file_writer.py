@@ -4,7 +4,7 @@ from datetime import datetime
 from shutil import rmtree
 
 
-from pynlog.core import FileWriter
+from pynlog import FileWriter
 
 
 class TestFileWriter(TestCase):

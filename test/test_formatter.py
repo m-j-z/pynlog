@@ -2,7 +2,7 @@ from unittest import TestCase, main
 from datetime import datetime
 
 
-from pynlog.core import Formatter, LogEntry, Level
+from pynlog import Formatter, LogEntry, Level
 
 
 class TestFormatter(TestCase):

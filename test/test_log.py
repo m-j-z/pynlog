@@ -4,7 +4,7 @@ import sys
 
 
 from pynlog._logentry import LogEntry
-from pynlog.core import Log, Formatter, Level
+from pynlog import Log, Formatter, Level
 
 
 class FakeFormatter(Formatter):

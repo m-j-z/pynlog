@@ -3,7 +3,7 @@ from io import StringIO
 import sys
 
 
-from pynlog.core import ConsoleWriter
+from pynlog import ConsoleWriter
 
 
 class TestConsoleWriter(TestCase):
