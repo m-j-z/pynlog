@@ -1,5 +1,6 @@
 from os import makedirs, path
 from datetime import datetime
+from re import compile
 
 
 from pynlog._writer import Writer
@@ -37,6 +38,7 @@ class FileWriter(Writer):
         self.__prev_filename = ""
         self.__file_prefix = ""
         self.__count = 0
+        self.__ansi_escape = compile(r"\x1B\[[0-9;]*[A-Za-z]")
 
     
     def create_file_name(self, now: datetime):
@@ -71,4 +73,4 @@ class FileWriter(Writer):
             self.__prev_filename = self.__output_path + "/" + self.create_file_name(datetime.now())
         
         with open(self.__prev_filename, "a") as file:
-            file.write(message + "\n")
+            file.write(self.__ansi_escape.sub('', message) + "\n")
