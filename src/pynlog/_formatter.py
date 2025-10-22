@@ -61,21 +61,6 @@ class Formatter:
             Level.WARNING: self.WARNING,
             Level.ERROR: self.ERROR,
         }
-
-
-    def __format_time(self, time: datetime) -> str:
-        """
-        Returns a string representing the passed datetime.
-            Example Output:
-                2025-10-22 18:05:01.123
-
-            Parameters:
-                time (datetime): A datetime object
-            
-            Returns:
-                str: A datetime as a string
-        """
-        return time.strftime("%Y-%m-%d %H:%M:%S.") + f"{int(time.microsecond / 1000):03d}"
     
 
     def __get_color(self, level: Level) -> str:
@@ -93,6 +78,21 @@ class Formatter:
         return self.END
 
 
+    def format_time(self, time: datetime) -> str:
+        """
+        Returns a string representing the passed datetime.
+            Example Output:
+                2025-10-22 18:05:01.123
+
+            Parameters:
+                time (datetime): A datetime object
+            
+            Returns:
+                str: A datetime as a string
+        """
+        return time.strftime("%Y-%m-%d %H:%M:%S.") + f"{int(time.microsecond / 1000):03d}"
+
+
     def format(self, entry: LogEntry) -> str:
         """
         Formats a LogEntry.
@@ -103,6 +103,6 @@ class Formatter:
             Returns:
                 str: A formatted strings
         """
-        time_str = self.__format_time(entry.time)
+        time_str = self.format_time(entry.time)
         tag_str = f"[{entry.level}]"
         return f"[{time_str}] {self.__get_color(entry.level)}{tag_str:<10}{self.END} {entry.caller}: {entry.message}"

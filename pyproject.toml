@@ -3,7 +3,7 @@ requires = ["hatchling >= 1.26"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pyclogger"
+name = "pynlog"
 version = "0.1.0"
 description = "A simple logger that prints colored logs to the console and to a file."
 authors = [
@@ -14,4 +14,4 @@ readme = "README.md"
 requires-python = ">=3.8"
 
 [tools.hatch.build.targets.wheel]
-packages = ["src/pyclogger"]
+packages = ["src/pynlog"]

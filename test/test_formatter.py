@@ -13,6 +13,13 @@ class TestFormatter(TestCase):
 
     def __get_time_str(self) -> str:
         return self.__now.strftime("%Y-%m-%d %H:%M:%S.") + f"{int(self.__now.microsecond / 1000):03d}"
+    
+
+    def test_format_time(self):
+        time = datetime(2025, 10, 22, 16, 55, 1, 102000)
+        actual = self.__formatter.format_time(time)
+        expected = "2025-10-22 16:55:01.102"
+        self.assertEqual(actual, expected)
 
     
     def test_debug_format(self):
