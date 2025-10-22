@@ -38,7 +38,7 @@ class TestConsoleWriter(TestCase):
 
     
     def tearDown(self) -> None:
-        sys.stderr = self.__sys_stdout
+        sys.stdout = self.__sys_stdout
 
 
 if __name__ == "__main__":

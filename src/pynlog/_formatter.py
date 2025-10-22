@@ -104,5 +104,5 @@ class Formatter:
                 str: A formatted strings
         """
         time_str = self.format_time(entry.time)
-        tag_str = f"[{entry.level}]"
+        tag_str = f"[{entry.level.name}]"
         return f"[{time_str}] {self.__get_color(entry.level)}{tag_str:<10}{self.END} {entry.caller}: {entry.message}"
