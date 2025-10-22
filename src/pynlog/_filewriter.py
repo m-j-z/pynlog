@@ -8,31 +8,42 @@ from pynlog._writer import Writer
 
 class FileWriter(Writer):
     """
-    A helper class used by Log to write to a file.
+    A helper class used by Log to write log message to a file.
 
-        Parameters:
-            output_path (str): The path to output log files at.
+    This class inherits from `Writer` and provides a simple `write` method for
+    writing log messages to a file. It also manages file creation and rotation
+    based on size.
 
-        Variables:
-            MAX_SIZE    (int): The maximum size of a file before writing to a new file.
-            EXT         (str): The extension used for each log file.
-        
-        Methods:
-            create_file_name()
-            write(message: str)
+    Attributes:
+        MAX_SIZE (int): The maximum size of a file (in bytes) before a new file
+                        file is created. Defaults to 50 MB.
+        EXT (str): The file extension used for log files. Defaults to ".log".
+
+    Methods:
+        create_file_name(now: datetime) -> str: Creates a filename based on the current datetime.
+        write(message: str) -> None: Writes a log message to a file.
     """
 
     MAX_SIZE: int = 50 * 1024 * 1024
     """
-    The maximum size before the writer will write to a new file, default is 50mb.
+    The maximum size (in bytes) before the writer rotates to a new file.
+    Defaults to 50 MB.
     """
 
     EXT: str = ".log"
     """
-    The extension used for each log file.
+    The file extension used for log files.
+    Defaults to ".log".
     """
 
     def __init__(self, output_path: str = "logs") -> None:
+        """
+        Initializes a FileWriter instance.
+
+        Args:
+            output_path (str): The directory where log files will be written.
+                                Defaults to "logs".
+        """
         makedirs(output_path, exist_ok=True)
         self.__output_path = output_path
         self.__prev_filename = ""
@@ -43,10 +54,13 @@ class FileWriter(Writer):
     
     def create_file_name(self, now: datetime) -> str:
         """
-        Creates a filename from the current datetime.
+        Creates a unique filename based on the current datetime.
 
-            Returns:
-                str: A filename.
+        Args:
+            now (datetime): The current datetime.
+        
+        Returns:
+            str: A unique filename including the file extension.
         """
         time_str = now.strftime("%Y-%m-%d_%H-%M-%S")
         file_name = f"log_{time_str}"
@@ -63,12 +77,12 @@ class FileWriter(Writer):
 
     def write(self, message: str) -> None:
         """
-        Writes a message to a file.
+        Writes a log message to a file. Handles file rotation
+        when the file exceeds `MAX_SIZE`.
 
-            Parameters:
-                message (str): The message to write.
+        Args:
+            message (str): The log message to write.
         """
-
         if not self.__prev_filename or (path.exists(self.__prev_filename) and path.getsize(self.__prev_filename) >= self.MAX_SIZE):
             self.__prev_filename = self.__output_path + "/" + self.create_file_name(datetime.now())
         

@@ -7,53 +7,61 @@ from pynlog._logentry import LogEntry
 
 class Formatter:
     """
-    Used to format log entries into strings.\n
-    Handles alignment, color codes, and timestamp insertion.\n
-        Variables:
-            DEBUG   (str): Used to prefix the level tag for DEBUG level logs.
-            INFO    (str): Used to prefix the level tag for INFO level logs.
-            SUCCESS (str): Used to prefix the level tag for SUCCESS level logs.
-            WARNING (str): Used to prefix the level tag for WARNING level logs.
-            ERROR   (str): Used to prefix the level tag for ERROR level logs.
-            END     (str): Used to suffix the level tag.
+    Formats log entries into human-readable strings.
 
+    This class handles alignment, color codes, and timestamp insertion to create
+    well-formatted log messages.
 
-        Methods:
-            format(entry: LogEntry)
+    Attributes:
+        DEBUG (str): Color code prefix for DEBUG level logs.
+        INFO (str): Color code prefix for INFO level logs.
+        SUCCESS (str): Color code prefix for SUCCESS level logs.
+        WARNING (str): Color code prefix for WARNING level logs.
+        ERROR (str): Color code prefix for ERROR level logs.
+        END (str): Color code suffix to reset colors to default.
+    
+    Methods:
+        format(entry: LogEntry) -> str: Formats a LogEntry into a string.
     """
 
     DEBUG: str = "\033[35m"
     """
-    Color for DEBUG level logs.
+    Color code prefix for DEBUG level logs.
     """
 
     INFO: str = "\033[36m"
     """
-    Color for INFO level logs.
+    Color code prefix for INFO level logs.
     """
 
     SUCCESS: str = "\033[32m"
     """
-    Color for SUCCESS level logs.
+    Color code prefix for SUCCESS level logs.
     """
     
     WARNING: str = "\033[33m"
     """
-    Color for WARNING level logs.
+    Color code prefix for WARNING level logs.
     """
     
     ERROR: str = "\033[31m"
     """
-    Color for ERROR level logs.
+    Color code prefix for ERROR level logs.
     """
     
     END: str = "\033[0m"
     """
-    Used to reset colors.
+    Color code suffix to reset colors to default.
     """
 
     @property
     def __COLORS(self) -> dict[Level, str]:
+        """
+        Returns a dictionary mapping log levels to their corresponding color codes.
+
+        Returns:
+            dict[Level, str]: A dictionary of LogLevels to color code strings.
+        """
         return {
             Level.DEBUG: self.DEBUG,
             Level.INFO: self.INFO,
@@ -65,13 +73,13 @@ class Formatter:
 
     def __get_color(self, level: Level) -> str:
         """
-        Returns a color string depending on the `level`.
+        Determines the color code based on the log level.
 
-            Parameters:
-                level (Level): The log level.
-            
-            Returns:
-                str: A color string.
+        Args:
+            level (Level): The log level.
+
+        Returns:
+            str: The corresponding color code string. Returns self.END if no color is assigned.
         """
         if level in self.__COLORS:
             return self.__COLORS[level]
@@ -80,28 +88,26 @@ class Formatter:
 
     def format_time(self, time: datetime) -> str:
         """
-        Returns a string representing the passed datetime.
-            Example Output:
-                2025-10-22 18:05:01.123
+        Formats a datetime object into a string representation.
 
-            Parameters:
-                time (datetime): A datetime object
-            
-            Returns:
-                str: A datetime as a string
+        Args:
+            time (datetime): The datetime object to format.
+
+        Returns:
+            str: A formatted string representing the datetime. Example: "2025-10-22 18:05:01.123".
         """
         return time.strftime("%Y-%m-%d %H:%M:%S.") + f"{int(time.microsecond / 1000):03d}"
 
 
     def format(self, entry: LogEntry) -> str:
         """
-        Formats a LogEntry.
+        Formats a LogEntry into a human-readable string.
 
-            Parameters:
-                entry (LogEntry): A dataclass containing information needed to create the string.
-
-            Returns:
-                str: A formatted strings
+        Args:
+            entry (LogEntry): The LogEntry object to format.
+        
+        Returns:
+            str: The formatted log message.
         """
         time_str = self.format_time(entry.time)
         tag_str = f"[{entry.level.name}]"

@@ -12,31 +12,37 @@ class Log:
 
     This class provides static methods for logging messages at
     different levels. It is not meant to be instantiated, instead call
-    its static methods directly.\n
+    its static methods directly.
 
-    By default, it logs to console and to a file.\n
+    By default, it logs to console and to a file. The minimum level is DEBUG.
 
-        Variables:
-            MIN_LEVEL         (LEVEL): The minimum level the logger should log, default is DEBUG.
-            FORMATTER     (Formatter): The formatter used to format the log message.
-            WRITERS     list[Writer]): A list of writers to write to.
+    Attributes:
+        MIN_LEVEL (LEVEL): The minimum logging level to be logged, default is DEBUG.
+        FORMATTER (Formatter): The formatter used to format the log message.
+        WRITERS (dict[str, Writer]): A dictionary of writers to write to. The keys are names
+                                        of the writers, and the values are Writer instances.
+                                        the default writers are "console_writer" and
+                                        "file_writer". You can remove each writer by popping
+                                        it with the corresponding key name.
         
-        Methods:
-            d(message: str)
-            i(message: str)
-            s(message: str)
-            w(message: str)
-            e(message: str)
+    Methods:
+        d(message: str) -> None: Logs a debug message.
+        i(message: str) -> None: Logs an info message. 
+        s(message: str) -> None: Logs a success message.
+        w(message: str) -> None: Logs a warning message.
+        e(message: str) -> None: Logs an error message.
     """
 
     MIN_LEVEL: Level = Level.DEBUG
     """
-    The minimum level, default is DEBUG.
+    The minimum logging level to be logged, default is DEBUG. Messages with a level lower
+    than this will not be logged.
     """
 
     FORMATTER: Formatter = Formatter()
     """
-    The formatter used to format the log message.
+    The formatter used to format the log message. THis object handles converting the
+    LogEntry into a human-readable string.
     """
 
     WRITERS: dict[str, Writer] = {
@@ -44,8 +50,10 @@ class Log:
         "file_writer": FileWriter()
     }
     """
-    A list of writers to write to, by default, writes to console and to a file.\n
-    If required, you can remove each writer by popping it with the keys console_writer and file_writer.
+    A dictionary of writers to write to. The keys are names of the writers, and the values are
+    Writer instances. The default writers are "console_writer" and "file_writer".
+    
+    If required, you can remove each writer by popping it with the keys "console_writer" and "file_writer".
     """
 
     @staticmethod
@@ -53,9 +61,13 @@ class Log:
         """
         Main method that handles the core logic for logging.
 
-            Parameters:
-                level (Level): The logging level.
-                message (str): The message to log.
+        This method checks if the given loggin level is greater than or equal to the minimum
+        logging level `MIN_LEVEL`. If it is, it creates a LogEntry, formats the entry using
+        the formatter, and writes the formatted message to each of the configured writers.
+
+        Args:
+            level (Level): The logging level.
+            message (str): The message to log.
         """
         if level < Log.MIN_LEVEL:
             return
@@ -73,8 +85,8 @@ class Log:
         """
         Logs a debug message.
             
-            Parameters:
-                message (str): The message to log.
+        Args:
+            message (str): The message to log.
         """
         Log.__log(Level.DEBUG, message)
 
@@ -84,8 +96,8 @@ class Log:
         """
         Logs a info message.
             
-            Parameters:
-                message (str): The message to log.
+        Args:
+            message (str): The message to log.
         """
         Log.__log(Level.INFO, message)
     
@@ -95,8 +107,8 @@ class Log:
         """
         Logs a success message.
             
-            Parameters:
-                message (str): The message to log.
+        Args:
+            message (str): The message to log.
         """
         Log.__log(Level.SUCCESS, message)
     
@@ -106,8 +118,8 @@ class Log:
         """
         Logs a warning message.
             
-            Parameters:
-                message (str): The message to log.
+        Args:
+            message (str): The message to log.
         """
         Log.__log(Level.WARNING, message)
     
@@ -117,7 +129,7 @@ class Log:
         """
         Logs a error message.
             
-            Parameters:
-                message (str): The message to log.
+        Args:
+            message (str): The message to log.
         """
         Log.__log(Level.ERROR, message)

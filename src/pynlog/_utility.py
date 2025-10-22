@@ -3,17 +3,22 @@ from inspect import currentframe
 
 def truncate(string: str, max_len: int = 24) -> str:
     """
-    Truncates a `string` to exactly `max_length` characters.
+    Truncates a string to a maximum length, padding with spaces if necessary.
 
-        Example Output:
-            ...a_name
+    This function ensures that the resulting string is exactly `max_len` characters long.
+    - If the input string is shorter than `max_len`, it's padded with spaces on the right.
+    - If the input string is longer than `max_len`, it's truncated.
 
-        Parameters:
-            string (str): The string to truncate.
-            max_len (int): The maximum length of a string before truncation happens, default is 24.
-        
-        Returns:
-            str: The truncated string.
+    Example Output:
+        ...y_very_very_long_name
+        short_name
+
+    Args:
+        string (str): The string to truncate or pad.
+        max_len (int): The maximum length of the resulting string. Defaults to 24.
+    
+    Returns:
+        str: The truncated or padded string.
     """
     if (len(string) <= max_len):
         return string.ljust(max_len)
@@ -22,16 +27,19 @@ def truncate(string: str, max_len: int = 24) -> str:
 
 def get_caller(n: int = 3) -> str:
     """
-    Returns the caller's function name and potentially class name.
+    Retrieves the name of the calling function (and potentially its class) from the call stack.
 
-        Example Output:
-            myclass.myfunction
+    This function traverses the call stack to identify the caller of the current function.
+    It returns a formatted string representing the caller's name, including the class name if available.
 
-        Parameters:
-            n (int): The number of frames to go back.
-        
-        Returns:
-            str: The caller as a string.
+    Example Output:
+        myclass.myfunction
+    
+    Args:
+        n (int): The number of frames to go back in the call stack to reach the caller. Defaults to 3.
+    
+    Returns:
+        str: A formatted string representing the caller's name, potentially including the class name.
     """
     frame = currentframe()
     for _ in range(n):
