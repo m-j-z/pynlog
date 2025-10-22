@@ -4,6 +4,7 @@ VENV_PATH=.venv
 BIN_PATH=$(VENV_PATH)/bin
 TEST_PATH=test
 OUT_PATH=out
+LOGS_PATH=logs
 REQUIREMENTS_PATH=requirements.txt
 
 
@@ -13,6 +14,9 @@ init: clean
 
 	@echo "Creating output folder"
 	@mkdir $(OUT_PATH)
+
+	@echo "Creating logs folder"
+	@mkdir $(LOGS_PATH)
 	
 	@echo "Installing external dependencies"
 	@$(BIN_PATH)/pip install -r $(REQUIREMENTS_PATH)
@@ -39,3 +43,5 @@ clean:
 	@rm -rf $(VENV_PATH)
 	@echo "Removing output folder"
 	@rm -rf $(OUT_PATH)
+	@echo "Removing logs folder"
+	@rm -rf $(LOGS_PATH)
