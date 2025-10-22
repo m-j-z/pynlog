@@ -41,7 +41,7 @@ class FileWriter(Writer):
         self.__ansi_escape = compile(r"\x1B\[[0-9;]*[A-Za-z]")
 
     
-    def create_file_name(self, now: datetime):
+    def create_file_name(self, now: datetime) -> str:
         """
         Creates a filename from the current datetime.
 
@@ -61,7 +61,7 @@ class FileWriter(Writer):
             
 
 
-    def write(self, message: str):
+    def write(self, message: str) -> None:
         """
         Writes a message to a file.
 

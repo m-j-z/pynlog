@@ -2,3 +2,5 @@
 __pycache__
 out
 logs
+.mypy_cache
+stubs

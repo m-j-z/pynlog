@@ -10,7 +10,7 @@ class Writer(ABC):
     """
 
     @abstractmethod
-    def write(self, message: str):
+    def write(self, message: str) -> None:
         """
         The function used to write a log.
         """
