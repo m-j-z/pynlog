@@ -3,7 +3,7 @@ from inspect import currentframe
 
 def truncate(string: str, max_len: int = 24) -> str:
     """
-    Truncates a `string` to a maximum of `max_length`.
+    Truncates a `string` to exactly `max_length` characters.
 
         Example Output:
             ...a_name
@@ -16,7 +16,7 @@ def truncate(string: str, max_len: int = 24) -> str:
             str: The truncated string.
     """
     if (len(string) <= max_len):
-        return string
+        return string.ljust(max_len)
     return "..." + string[-(max_len - 3):]
 
 

@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 
 
-from pyclogger._utility import truncate, get_caller
+from pynlog._utility import truncate, get_caller
 
 
 class TestTruncate(TestCase):
@@ -10,7 +10,7 @@ class TestTruncate(TestCase):
     """
     def test_short_truncate(self):
         actual = truncate("short_string")
-        expected = "short_string"
+        expected = "short_string            "
         self.assertEqual(actual, expected)
     
 
@@ -29,7 +29,7 @@ class TestGetCaller(TestCase):
             return get_caller(1)
         
         actual = short_name()
-        expected = "short_name"
+        expected = "short_name              "
         self.assertEqual(actual, expected)
 
     
@@ -48,7 +48,7 @@ class TestGetCaller(TestCase):
                 return get_caller(1)
         
         actual = Sample().short_name()
-        expected = "Sample.short_name"
+        expected = "Sample.short_name       "
         self.assertEqual(actual, expected)
 
 
