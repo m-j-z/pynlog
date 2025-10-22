@@ -2,6 +2,7 @@ from unittest import TestCase, main
 from os import path, listdir
 from datetime import datetime
 from shutil import rmtree
+from time import sleep
 
 
 from pynlog import FileWriter
@@ -21,7 +22,7 @@ class TestFileWriter(TestCase):
         if not files:
             raise FileNotFoundError("No files found in output folder")
         
-        last_file = max(files, key=path.getmtime)
+        last_file = max(files, key=path.getctime)
 
         with open(last_file, "r") as file:
             return file.read()
@@ -71,6 +72,8 @@ class TestFileWriter(TestCase):
         actual = self.__read_file()
         expected = f"{first_message}\n"
         self.assertEqual(actual, expected)
+
+        sleep(0.1)
 
         second_message = "test_write_new_file_2"
         self.__writer.write(second_message)

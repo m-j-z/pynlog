@@ -53,7 +53,7 @@ class FileWriter(Writer):
 
         if self.__file_prefix == file_name:
             self.__count += 1
-            return f"log_{time_str}_{self.__count + 1}{self.EXT}"
+            return f"log_{time_str}_{self.__count}{self.EXT}"
         
         self.__file_prefix = file_name
         self.__count = 0
