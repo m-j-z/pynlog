@@ -3,8 +3,7 @@ from io import StringIO
 import sys
 
 
-from pynlog._logentry import LogEntry
-from pynlog import Log, Formatter, Level
+from pynlog import Log, Formatter, Level, Writer, LogEntry
 
 
 class FakeFormatter(Formatter):
@@ -104,6 +103,17 @@ class TestLog(TestCase):
         actual = self.__captured.getvalue().strip()
         expected = "DEBUG first message\nSUCCESS third message"
         self.assertEqual(actual, expected)
+    
+
+    def test_add_writer(self):
+        class FakeWriter(Writer):
+            def write(self, message: str) -> None:
+                print(message)
+        
+        Log.WRITERS["fake_writer"] = FakeWriter()
+        self.assertEqual(len(Log.WRITERS.values()), 3)
+
+        Log.WRITERS.pop("fake_writer")
 
 
     def tearDown(self) -> None:

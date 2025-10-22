@@ -15,3 +15,6 @@ requires-python = ">=3.8"
 
 [tools.hatch.build.targets.wheel]
 packages = ["src/pynlog"]
+
+[tools.hatch.build]
+include = ["src/pynlog/*.pyi", "src/pynlog/py.typed"]

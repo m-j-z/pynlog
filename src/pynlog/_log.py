@@ -39,9 +39,13 @@ class Log:
     The formatter used to format the log message.
     """
 
-    WRITERS: list[Writer] = [ConsoleWriter(), FileWriter()]
+    WRITERS: dict[str, Writer] = {
+        "console_writer": ConsoleWriter(),
+        "file_writer": FileWriter()
+    }
     """
-    A list of writers to write to, by default, writes to console and to a file.
+    A list of writers to write to, by default, writes to console and to a file.\n
+    If required, you can remove each writer by popping it with the keys console_writer and file_writer.
     """
 
     @staticmethod
@@ -60,7 +64,7 @@ class Log:
         entry = LogEntry(level, caller, message)
 
         formatted_message = Log.FORMATTER.format(entry)
-        for writer in Log.WRITERS:
+        for writer in Log.WRITERS.values():
             writer.write(formatted_message)
 
 

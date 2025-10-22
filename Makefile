@@ -1,8 +1,11 @@
 PYTHON=python3
+PACKAGE_NAME=pynlog
 
 VENV_PATH=.venv
 BIN_PATH=$(VENV_PATH)/bin
 TEST_PATH=test
+SRC_PATH=src
+PACKAGE_PATH=$(SRC_PATH)/$(PACKAGE_NAME)
 OUT_PATH=out
 LOGS_PATH=logs
 REQUIREMENTS_PATH=requirements.txt
@@ -45,3 +48,9 @@ clean:
 	@rm -rf $(OUT_PATH)
 	@echo "Removing logs folder"
 	@rm -rf $(LOGS_PATH)
+
+py-stubs:
+	@echo "Removing stubs"
+	@find $(PACKAGE_PATH) -type f -name "*.pyi" -delete
+	@echo "Creating stubs"
+	@$(BIN_PATH)/stubgen -p $(PACKAGE_NAME) -o $(SRC_PATH)
