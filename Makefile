@@ -27,7 +27,7 @@ test-all:
 run-tests:
 	@for arg in $(ARGS); do \
 		echo "Running $$arg..."; \
-		$(BIN_PATH)/$(PYTHON) $(TEST_PATH)/$$arg.py; \
+		$(BIN_PATH)/$(PYTHON) $(TEST_PATH)/test_$$arg.py; \
 	done
 
 clean:
