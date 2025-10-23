@@ -15,6 +15,13 @@ It defaults to logging to both the console and a file.
 
 ---
 
+## Installation
+```bash
+pip install pynlog
+```
+
+---
+
 ## Usage
 
 **When used by a function**
@@ -66,6 +73,8 @@ MyClass().my_function()
 [2025-10-22 16:57:15.178] [WARNING]  MyClass.my_function     : This is a warning log.
 [2025-10-22 16:57:15.178] [ERROR]    MyClass.my_function     : This is an error log.
 ```
+
+---
 
 ## Customization
 
@@ -175,6 +184,8 @@ Control where your logs are sent:
   ```
   [2025-10-22 17:11:21.106] [INFO]     my_function             : This is an info log.
   ```
+
+---
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
