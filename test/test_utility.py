@@ -29,7 +29,7 @@ class TestGetCaller(TestCase):
             return get_caller(1)
         
         actual = short_name()
-        expected = "short_name              "
+        expected = "short_name"
         self.assertEqual(actual, expected)
 
     
@@ -38,7 +38,7 @@ class TestGetCaller(TestCase):
             return get_caller(1)
         
         actual = very_very_very_very_long_name()
-        expected = "...y_very_very_long_name"
+        expected = "very_very_very_very_long_name"
         self.assertEqual(actual, expected)
     
 
@@ -48,7 +48,7 @@ class TestGetCaller(TestCase):
                 return get_caller(1)
         
         actual = Sample().short_name()
-        expected = "Sample.short_name       "
+        expected = "Sample.short_name"
         self.assertEqual(actual, expected)
 
 
@@ -58,7 +58,7 @@ class TestGetCaller(TestCase):
                 return get_caller(1)
         
         actual = Sample().very_very_very_very_long_name()
-        expected = "...y_very_very_long_name"
+        expected = "Sample.very_very_very_very_long_name"
         self.assertEqual(actual, expected)
 
 

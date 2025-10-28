@@ -3,6 +3,7 @@ from datetime import datetime
 
 from pynlog._level import Level
 from pynlog._logentry import LogEntry
+from pynlog._utility import truncate
 
 
 class Formatter:
@@ -111,4 +112,5 @@ class Formatter:
         """
         time_str = self.format_time(entry.time)
         tag_str = f"[{entry.level.name}]"
-        return f"[{time_str}] {self.__get_color(entry.level)}{tag_str:<10}{self.END} {entry.caller}: {entry.message}"
+        caller_str = truncate(entry.caller)
+        return f"[{time_str}] {self.__get_color(entry.level)}{tag_str:<10}{self.END} {caller_str}: {entry.message}"

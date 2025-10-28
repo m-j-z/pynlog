@@ -58,5 +58,5 @@ def get_caller(n: int = 3) -> str:
         cls_name = frame.f_locals["cls"].__name__
     
     if cls_name:
-        return truncate(f"{cls_name}.{func_name}")
-    return truncate(func_name)
+        return f"{cls_name}.{func_name}"
+    return func_name

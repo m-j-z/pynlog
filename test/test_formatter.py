@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 from pynlog import Formatter, LogEntry, Level
+from pynlog._utility import truncate
 
 
 class TestFormatter(TestCase):
@@ -27,7 +28,7 @@ class TestFormatter(TestCase):
         actual = self.__formatter.format(entry)
 
         time_str = self.__get_time_str()
-        expected = f"[{time_str}] {self.__formatter.DEBUG}[DEBUG]   {self.__formatter.END} test_debug_format: testing debug format"
+        expected = f"[{time_str}] {self.__formatter.DEBUG}[DEBUG]   {self.__formatter.END} {truncate("test_debug_format")}: testing debug format"
         self.assertEqual(actual, expected)
 
 
@@ -36,7 +37,7 @@ class TestFormatter(TestCase):
         actual = self.__formatter.format(entry)
 
         time_str = self.__get_time_str()
-        expected = f"[{time_str}] {self.__formatter.INFO}[INFO]    {self.__formatter.END} test_info_format: testing info format"
+        expected = f"[{time_str}] {self.__formatter.INFO}[INFO]    {self.__formatter.END} {truncate("test_info_format")}: testing info format"
         self.assertEqual(actual, expected)
 
     
@@ -45,7 +46,7 @@ class TestFormatter(TestCase):
         actual = self.__formatter.format(entry)
 
         time_str = self.__get_time_str()
-        expected = f"[{time_str}] {self.__formatter.SUCCESS}[SUCCESS] {self.__formatter.END} test_success_format: testing success format"
+        expected = f"[{time_str}] {self.__formatter.SUCCESS}[SUCCESS] {self.__formatter.END} {truncate("test_success_format")}: testing success format"
         self.assertEqual(actual, expected)
     
 
@@ -54,7 +55,7 @@ class TestFormatter(TestCase):
         actual = self.__formatter.format(entry)
 
         time_str = self.__get_time_str()
-        expected = f"[{time_str}] {self.__formatter.WARNING}[WARNING] {self.__formatter.END} test_warning_format: testing warning format"
+        expected = f"[{time_str}] {self.__formatter.WARNING}[WARNING] {self.__formatter.END} {truncate("test_warning_format")}: testing warning format"
         self.assertEqual(actual, expected)
 
     
@@ -63,7 +64,7 @@ class TestFormatter(TestCase):
         actual = self.__formatter.format(entry)
 
         time_str = self.__get_time_str()
-        expected = f"[{time_str}] {self.__formatter.ERROR}[ERROR]   {self.__formatter.END} test_error_format: testing error format"
+        expected = f"[{time_str}] {self.__formatter.ERROR}[ERROR]   {self.__formatter.END} {truncate("test_error_format")}: testing error format"
         self.assertEqual(actual, expected)
     
 
@@ -74,7 +75,7 @@ class TestFormatter(TestCase):
         actual = self.__formatter.format(entry)
 
         time_str = self.__get_time_str()
-        expected = f"[{time_str}] {self.__formatter.ERROR}[ERROR]   {self.__formatter.END} test_change_color: testing change color format"
+        expected = f"[{time_str}] {self.__formatter.ERROR}[ERROR]   {self.__formatter.END} {truncate("test_change_color")}: testing change color format"
         self.assertEqual(actual, expected)
 
 
