@@ -8,7 +8,7 @@ include = ["src/pynlog/*.pyi", "src/pynlog/py.typed"]
 
 [project]
 name = "pynlog"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
     { name = "Michael", email = "michaelzdv7@gmail.com" }
 ]
